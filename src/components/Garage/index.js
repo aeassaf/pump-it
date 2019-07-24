@@ -1,11 +1,11 @@
-import React from "react"
+import React from 'react'
 
 const Garage = () => {
-    return (
-        <div>
-        <p>Garage</p>
-        </div>
-    )
+  return (
+    <div>
+      <p>Garage</p>
+    </div>
+  )
 }
 
-export default Garage;
+export default Garage
