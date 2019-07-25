@@ -1,0 +1,80 @@
+.background {
+  z-index: 9999;
+  width: 100%;
+  height: 94.5%;
+  position: fixed;
+  left: 0;
+  background-image: url(./home.jpg);
+  background-size: cover;
+}
+
+.buttonstyle {
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 20px;
+  padding-bottom: 380px;
+  border-radius: 20px;
+  font-style: Helvetica;
+  background-color: Transparent;
+  font-weight: bold;
+  color: white;
+}
+
+.buttonstyle_gas {
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 20px;
+  padding-bottom: 380px;
+  border-radius: 20px;
+  font-style: Helvetica;
+  background-color: Transparent;
+  font-weight: bold;
+}
+
+.buttonstyle_paint {
+  padding-left: 105px;
+  padding-right: 105px;
+  padding-top: 20px;
+  padding-bottom: 380px;
+  border-radius: 20px;
+  background-color: Transparent;
+  font-style: Helvetica;
+  font-weight: bold;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.center_btn {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+.center_right {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.center_left {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
