@@ -1,0 +1,8 @@
+.pagestyle_gas {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  background-image: url(./gas.jpg);
+  background-size: cover;
+}
