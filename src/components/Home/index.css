@@ -1,16 +1,13 @@
 .background {
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 56px);
   position: fixed;
-  background-image: url(../../../public/images/home.jpg);
+  background-image: url(../../images/home.jpg);
   background-size: cover;
 }
 
 .buttonstyle {
-  padding-left: 100px;
-  padding-right: 100px;
-  padding-top: 20px;
-  padding-bottom: 380px;
+  padding: 20px 100px 380px 100px;
   border-radius: 20px;
   font-style: Helvetica;
   background-color: Transparent;
@@ -27,10 +24,7 @@
 }
 
 .buttonstyle_paint {
-  padding-left: 105px;
-  padding-right: 105px;
-  padding-top: 20px;
-  padding-bottom: 380px;
+  padding: 20px 105px 380px 105px;
   border-radius: 20px;
   background-color: Transparent;
   font-style: Helvetica;

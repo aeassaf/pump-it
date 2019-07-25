@@ -1,8 +1,7 @@
 .pagestyle_gas {
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 56px);
   position: fixed;
-  left: 0;
-  background-image: url(../../../public/images/gas.jpg);
+  background-image: url(../../images/gas.jpg);
   background-size: cover;
 }
