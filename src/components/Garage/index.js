@@ -1,11 +1,8 @@
 import React from 'react'
+import './index.css'
 
 const Garage = () => {
-  return (
-    <div>
-      <p>Garage</p>
-    </div>
-  )
+  return <div className="pagestyle" />
 }
 
 export default Garage
