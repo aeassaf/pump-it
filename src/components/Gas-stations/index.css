@@ -3,6 +3,6 @@
   height: 100%;
   position: fixed;
   left: 0;
-  background-image: url(./gas.jpg);
+  background-image: url(../../../public/images/gas.jpg);
   background-size: cover;
 }

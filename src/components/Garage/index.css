@@ -1,8 +1,7 @@
-.pagestyle {
+.pagestyle_garage {
   width: 100%;
   height: 100%;
   position: fixed;
-  left: 0;
-  background-image: url(./maintenance.jpg);
+  background-image: url(../../../public/images/maintenance.jpg);
   background-size: cover;
 }
