@@ -15,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "yarn lint",
+    "test": "lint src",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
