@@ -7,7 +7,7 @@
 
 .flex_item_description {
   align-items: center;
-  padding-top: 100px;
+  padding-top: 150px;
 }
 
 .background {
@@ -19,7 +19,7 @@
 
 .buttonstyle {
   width: 20%;
-  padding: 70px;
+  height: 50%;
   border-radius: 20px;
   font-style: Helvetica;
   background-color: Transparent;
