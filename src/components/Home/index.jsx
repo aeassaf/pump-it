@@ -2,14 +2,15 @@ import React from 'react';
 import './index.css';
 import { withRouter, Link } from 'react-router-dom';
 
+
 const Home = () => (
   <div className="background flex_container">
     <Link
       to="/gas"
-      className="buttonstyle flex_item btn btn-danger btn-lg"
+      className="buttonstyle btn btn-danger btn-lg red"
     >
-        Nearest Gas Station
-      <p align="center" className=" flex_item_description">
+    Nearest Gas Station
+      <p align="center" className=" flex_item_description smaller">
           Find the nearest gas station
         {' '}
         <br />
@@ -20,10 +21,10 @@ to your location
 
     <Link
       to="/maintenance"
-      className="buttonstyle flex_item btn btn-info btn-lg"
+      className="buttonstyle btn btn-info btn-lg blue"
     >
-        Maintenance
-      <p align="center" className="flex_item_description">
+      Maintenance
+      <p align="center" className="flex_item_description smaller">
           Find the nearest garage
         {' '}
         <br />
@@ -34,10 +35,10 @@ to your location
 
     <Link
       to="/paint-shops"
-      className="buttonstyle flex_item btn btn-success btn-lg"
+      className="buttonstyle btn btn-success btn-lg green"
     >
         Paint Shops
-      <p align="center" className="flex_item_description">
+      <p align="center" className="flex_item_description smaller">
           Find the nearest paint shop
         {' '}
         <br />

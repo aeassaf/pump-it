@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+
 .flex_container {
   display: flex;
   flex-direction: row;
@@ -21,8 +23,26 @@
   width: 20%;
   height: 50%;
   border-radius: 20px;
-  font-style: Helvetica;
+  font-size: 30px;
+  font-family: 'Roboto Condensed', sans-serif;
   background-color: Transparent;
-  font-weight: bold;
   color: white;
+  font-weight: bold;
+}
+
+.smaller {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.blue {
+  background-color: rgba(0, 255, 255, 0.1);
+}
+
+.green {
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.red {
+  background-color: rgba(255, 0, 0, 0.1);
 }
