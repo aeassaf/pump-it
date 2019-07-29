@@ -1,9 +1,10 @@
 import React from 'react';
 import './index.css';
+import Map from '../Map/index';
 
 const gasStations = () => (
   <div className="pagestyle_gas">
-    <p>gas stations</p>
+    <Map />
   </div>
 );
 
