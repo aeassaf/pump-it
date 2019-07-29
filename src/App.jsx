@@ -6,6 +6,8 @@ import gasStations from './components/Gas-stations';
 import PaintShops from './components/Paint-shops';
 import Navigation from './components/Navigation';
 
+require('dotenv').config();
+
 function App() {
   return (
     <div className="App">
