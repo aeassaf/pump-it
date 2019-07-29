@@ -1,0 +1,8 @@
+.map_flex {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  align-content: flex-end;
+  margin-left: 45%;
+}
