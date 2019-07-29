@@ -1,6 +1,8 @@
 import React from 'react';
 import MapGL from 'react-map-gl';
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 const Map = () => (
   <MapGL
     width={700}
@@ -9,7 +11,7 @@ const Map = () => (
     longitude={-122.331}
     zoom={9.017}
     mapStyle="mapbox://styles/mapbox/dark-v9"
-    mapboxApiAccessToken="pk.eyJ1IjoiYW50b2luZS1hc3NhZjE1IiwiYSI6ImNqeW8wcjFseTB0bDkzbnBlc2V1aGRjdnUifQ.yfNdGKv27Nxa4lDiZ5pwtQ"
+    mapboxApiAccessToken={API_KEY}
   />
 );
 
