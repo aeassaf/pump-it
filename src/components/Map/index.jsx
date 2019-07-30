@@ -1,18 +1,30 @@
-import React from 'react';
-import MapGL from 'react-map-gl';
+import React, { useState } from 'react';
+import ReactMapGL from 'react-map-gl';
+import './index.css';
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+const { REACT_APP_API_KEY } = process.env;
 
-const Map = () => (
-  <MapGL
-    width={700}
-    height={450}
-    latitude={37.768}
-    longitude={-122.331}
-    zoom={9.017}
-    mapStyle="mapbox://styles/mapbox/dark-v9"
-    mapboxApiAccessToken={API_KEY}
-  />
-);
+function Map() {
+  const [viewport, setViewport] = useState({
+    latitude: 45.65,
+    longitude: -76.43,
+    width: 700,
+    height: 500,
+    zoom: 10,
+  });
+
+  return (
+    <div className="map_flex">
+      <ReactMapGL
+        {...viewport}
+        mapboxApiAccessToken={REACT_APP_API_KEY}
+        onViewportChange={(viewport) => {
+          setViewport(viewport);
+        }}
+        mapStyle="mapbox://styles/mapbox/dark-v9"
+      />
+    </div>
+  );
+}
 
 export default Map;
