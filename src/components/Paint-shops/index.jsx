@@ -1,11 +1,17 @@
 import React from 'react';
 import './index.css';
 import Map from '../Map/index';
+import TypeofPaint from '../Selectors/Type Of Paint';
 
 
 const PaintShops = () => (
   <div className="pagestyle_paint">
-    <Map />
+    <div className="flex_container_map">
+      <TypeofPaint />
+
+      <Map />
+    </div>
+
   </div>
 );
 
