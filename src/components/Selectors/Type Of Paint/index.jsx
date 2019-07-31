@@ -29,8 +29,9 @@ class TypeofPaint extends React.Component {
 onClick = (event) => {
   const { value } = event.target;
   console.log(value);
+
   if (value !== 'None' && value !== 'Other') {
-    const loco = this.location(value);
+    this.location(value);
   }
 }
 

@@ -31,7 +31,7 @@ onClick = (event) => {
   const { value } = event.target;
   console.log(value);
   if (value !== 'none' && value !== 'Other') {
-    const loco = this.location(value);
+    this.location(value);
   }
 }
 
