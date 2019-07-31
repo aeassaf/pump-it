@@ -1,28 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './index.css';
 import {
-  Map, InfoWindow, Marker, GoogleApiWrapper,
+  Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
 
 const { REACT_APP_API_KEY } = process.env;
 
+const style = {
+  width: '40%',
+  height: '50%',
+};
 
-const GMap = () => (
-  <Map google={this.props.google} zoom={14}>
 
-    <Marker
-      onClick={this.onMarkerClick}
-      name="Current location"
-    />
+class GMap extends React.Component {
+  state={}
 
-    <InfoWindow onClose={this.onInfoWindowClose}>
-      <div>
-        <h1>{this.state.selectedPlace.name}</h1>
-      </div>
-    </InfoWindow>
-  </Map>
-);
+  render() {
+    return (
+      <Map
+        className="map_flex"
+        google={this.props.google}
+        style={style}
+        zoom={4}
+      >
+
+        <Marker
+          onClick={this.onMarkerClick}
+          name="Current location"
+        />
+
+        <InfoWindow onClose={this.onInfoWindowClose}>
+          <div>
+            <h1>hi</h1>
+          </div>
+        </InfoWindow>
+      </Map>
+
+    );
+  }
+}
+
 
 export default GoogleApiWrapper({
-  apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE),
+  apiKey: (REACT_APP_API_KEY),
 })(GMap);
