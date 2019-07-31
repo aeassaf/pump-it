@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.css';
-import Map from '../Map/index';
+import GMap from '../Map/index';
 
 const Garage = () => (
   <div className="pagestyle_garage">
-    <Map />
+    <GMap />
   </div>
 );
 

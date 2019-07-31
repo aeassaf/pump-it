@@ -1,11 +1,11 @@
 import React from 'react';
 import './index.css';
-import Map from '../Map/index';
+import GMap from '../Map/index';
 
 
 const PaintShops = () => (
   <div className="pagestyle_paint">
-    <Map />
+    <GMap />
   </div>
 );
 
