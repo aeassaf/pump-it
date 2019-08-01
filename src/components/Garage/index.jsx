@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import Map from '../Map/index';
+import GMap from '../Map/index';
 import TypeofCars from '../Selectors/Car-Brands';
 import TypeofMaintenance from '../Selectors/Type Of Maintenance';
 
@@ -11,9 +11,8 @@ const Garage = () => (
       <TypeofCars />
       <TypeofMaintenance />
 
-      <Map />
+      <GMap />
     </div>
-
   </div>
 );
 

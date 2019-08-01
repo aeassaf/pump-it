@@ -1,32 +1,48 @@
-import React, { useState } from 'react';
-import ReactMapGL from 'react-map-gl';
+import React from 'react';
 import './index.css';
+import {
+  Map, GoogleApiWrapper, Marker, InfoWindow,
+} from 'google-maps-react';
 
 require('dotenv').config();
 
 const { REACT_APP_API_KEY } = process.env;
 
-function Map() {
-  const [viewport, setViewport] = useState({
-    latitude: 45.65,
-    longitude: -76.43,
-    width: 700,
-    height: 500,
-    zoom: 10,
-  });
+const style = {
+  width: '40%',
+  height: '50%',
+};
 
-  return (
-    <div className="map_margin">
-      <ReactMapGL
-        {...viewport}
-        mapboxApiAccessToken={REACT_APP_API_KEY}
-        onViewportChange={(viewport) => {
-          setViewport(viewport);
-        }}
-        mapStyle="mapbox://styles/mapbox/dark-v9"
-      />
-    </div>
-  );
+
+class GMap extends React.Component {
+  state={}
+
+  render() {
+    return (
+      <Map
+        className="map_flex"
+        google={this.props.google}
+        style={style}
+        zoom={4}
+      >
+
+        <Marker
+          onClick={this.onMarkerClick}
+          name="Current location"
+        />
+
+        <InfoWindow onClose={this.onInfoWindowClose}>
+          <div>
+            <h1>hi</h1>
+          </div>
+        </InfoWindow>
+      </Map>
+
+    );
+  }
 }
 
-export default Map;
+
+export default GoogleApiWrapper({
+  apiKey: (REACT_APP_API_KEY),
+})(GMap);

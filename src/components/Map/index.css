@@ -3,8 +3,7 @@
   justify-content: center;
   height: 100%;
   align-items: center;
+  align-content: flex-end;
+  margin: 10% 0% 0% 50%;
 }
 
-.map_margin {
-  margin-left: 250px;
-}
