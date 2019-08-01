@@ -4,6 +4,8 @@ import {
   Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
 
+require('dotenv').config();
+
 const { REACT_APP_API_KEY } = process.env;
 
 const style = {

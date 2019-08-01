@@ -1,4 +1,4 @@
-.map_flex {
+.flex_container_map {
   display: flex;
   justify-content: center;
   height: 100%;
@@ -6,3 +6,4 @@
   align-content: flex-end;
   margin: 10% 0% 0% 50%;
 }
+
