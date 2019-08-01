@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import ReactMapGL from 'react-map-gl';
 import './index.css';
 
+require('dotenv').config();
+
 const { REACT_APP_API_KEY } = process.env;
 
 function Map() {
