@@ -14,7 +14,7 @@ function Map() {
   });
 
   return (
-    <div className="map_flex">
+    <div className="map_margin">
       <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={REACT_APP_API_KEY}
