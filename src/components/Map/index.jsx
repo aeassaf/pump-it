@@ -20,7 +20,7 @@ class GMap extends React.Component {
   render() {
     return (
       <Map
-        className="map_flex"
+        className="map_margin"
         google={this.props.google}
         style={style}
         zoom={4}
