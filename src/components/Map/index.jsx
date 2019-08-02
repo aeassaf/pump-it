@@ -16,35 +16,36 @@ const style = {
   height: '50%',
 };
 
-let count = 0;
 
 class GMap extends React.Component {
   static contextType = dropDownContent;
 
+static dropvalue;
+
+static count;
 
   state={
-    lat: null,
-    lng: null,
+    latitude: null,
+    longitude: null,
+    value: null,
   }
 
-
   componentWillMount() {
-    if (count === 0) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.setState({ lat: position.coords.latitude, lng: position.coords.longitude });
-          count++;
-          console.log(count);
-        },
-        error => console.log(error),
-      );
-    }
-    if (count !== 0) {
-      Geocode.fromAddress(`${this.current_value}`).then(
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({ latitude: position.coords.latitude, longitude: position.coords.longitude });
+      },
+      error => console.log(error),
+    );
+  }
+
+  componentDidUpdate() {
+    if (this.dropvalue && this.dropvalue !== this.state.value) {
+      Geocode.fromAddress(this.dropvalue).then(
         (response) => {
-          const { latitude, longitude } = response.results[0].geometry.location;
-          console.log(latitude, longitude);
-          this.setState({ lat: latitude, lng: longitude });
+          const { lat, lng } = response.results[0].geometry.location;
+          console.log(lat, lng);
+          this.setState({ latitude: lat, longitude: lng, value: this.dropvalue });
         },
         (error) => {
           console.error(error);
@@ -53,45 +54,37 @@ class GMap extends React.Component {
     }
   }
 
-
   render() {
-    console.log(this.context);
-    console.log(this.state.lat, this.state.lng);
+    const { current_value } = this.context;
+    this.dropvalue = current_value;
+
 
     return (
-      <dropDownContent.Consumer>
-        {(context) => {
-          const { current_value } = context;
-          return (
+      <div>
+
+        <Map
+          className="map_margin"
+          google={this.props.google}
+          style={style}
+          center={{ lat: this.state.latitude, lng: this.state.longitude }}
+          zoom={12}
+          onClick={this.onMapClicked}
+        >
+
+          <Marker
+            onClick={this.onMarkerClick}
+            name="Current location"
+            position={{ lat: this.state.latitude, lng: this.state.longitude }}
+          />
+
+          <InfoWindow onClose={this.onInfoWindowClose}>
             <div>
-
-              <Map
-                className="map_margin"
-                google={this.props.google}
-                style={style}
-                center={{ lat: this.state.lat, lng: this.state.lng }}
-                zoom={12}
-                onClick={this.onMapClicked}
-              >
-
-                <Marker
-                  onClick={this.onMarkerClick}
-                  name="Current location"
-                  position={{ lat: this.state.lat, lng: this.state.lng }}
-                />
-
-                <InfoWindow onClose={this.onInfoWindowClose}>
-                  <div>
-                    <h1>hi</h1>
-                  </div>
-                </InfoWindow>
-              </Map>
-
+              <h1>hi</h1>
             </div>
-          );
-        }}
+          </InfoWindow>
+        </Map>
 
-      </dropDownContent.Consumer>
+      </div>
 
     );
   }

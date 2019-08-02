@@ -14,9 +14,10 @@ class PaintShops extends React.Component {
       <div className="pagestyle_paint">
 
         <div className="flex_container_map">
-          <Dropdown content={obj.Paintshops} />
+          <Dropdown content={obj.Paintshops}>
 
-          <GMap />
+            <GMap />
+          </Dropdown>
         </div>
 
 
