@@ -4,14 +4,17 @@ import GMap from '../Map/index';
 import Dropdown from '../Dropdown';
 import obj from '../Dropdown/content';
 
+
 const Garage = () => (
   <div className="pagestyle_garage">
     <div className="flex_container_map">
 
-      <Dropdown content={obj.Brand} />
-      <Dropdown content={obj.TypeofMaintenance} />
 
-      <GMap />
+      <Dropdown content={obj.Brand}>
+        <GMap />
+      </Dropdown>
+
+
     </div>
   </div>
 );
