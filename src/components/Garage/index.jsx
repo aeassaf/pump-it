@@ -3,17 +3,28 @@ import './index.css';
 import GMap from '../Map/index';
 import Dropdown from '../Dropdown';
 import obj from '../Dropdown/content';
+import Brands from '../Dropdown/Brand';
 
-const Garage = () => (
-  <div className="pagestyle_garage">
-    <div className="flex_container_map">
+class Garage extends React.Component {
+state ={}
 
-      <Dropdown content={obj.Brand} />
-      <Dropdown content={obj.TypeofMaintenance} />
 
-      <GMap />
+render() {
+  return (
+    <div className="pagestyle_garage">
+      <div className="flex_container_map">
+
+        <Brands content={obj.Brand}>
+          <Dropdown content={obj.TypeofMaintenance}>
+            <GMap />
+          </Dropdown>
+        </Brands>
+
+
+      </div>
     </div>
-  </div>
-);
+  );
+}
+}
 
 export default Garage;
