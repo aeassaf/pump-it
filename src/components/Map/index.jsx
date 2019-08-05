@@ -20,9 +20,11 @@ const style = {
 class GMap extends React.Component {
   static contextType = dropDownContent;
 
+
 static dropvalue;
 
-static count;
+static brandValue;
+
 
   state={
     latitude: null,
@@ -41,7 +43,7 @@ static count;
 
   componentDidUpdate() {
     if (this.dropvalue && this.dropvalue !== this.state.value) {
-      Geocode.fromAddress(this.dropvalue).then(
+      Geocode.fromAddress(`Nearest ${this.brandValue} ${this.dropvalue} `).then(
         (response) => {
           const { lat, lng } = response.results[0].geometry.location;
           console.log(lat, lng);
@@ -55,8 +57,13 @@ static count;
   }
 
   render() {
-    const { current_value } = this.context;
-    this.dropvalue = current_value;
+    try {
+      const { current_value, current_brand } = this.context;
+      this.dropvalue = current_value;
+      this.brandValue = current_brand;
+    } catch (e) {
+      console.error(e);
+    }
 
 
     return (
