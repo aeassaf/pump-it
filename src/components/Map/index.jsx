@@ -6,7 +6,7 @@ import {
 import Geocode from 'react-geocode';
 
 require('dotenv').config();
-// const axios = require('axios');
+const axios = require('axios');
 
 const { REACT_APP_API_KEY } = process.env;
 Geocode.setApiKey(REACT_APP_API_KEY);
@@ -20,7 +20,6 @@ class GMap extends React.Component {
   state={
     latitude: null,
     longitude: null,
-    value: null,
   }
 
   componentWillMount() {
@@ -32,19 +31,34 @@ class GMap extends React.Component {
     );
   }
 
-  // axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.893791%2035.501778&name=BMW%20Garage&type=garage&radius=1500&key=AIzaSyAQGrPwXrL_frF93kNy2cVXNJ0vDR5pP6I', { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     }).then((respone) => {
-  //       console.log('response', respone);
-  //     });
-  // }
 
   getInfo = (dropdownVal) => {
-    if (dropdownVal && dropdownVal !== this.state.value) {
-      if (dropdownVal.Brand) {
-        console.log(dropdownVal);
-      } else { console.log('exception'); }
+    if (dropdownVal.Brand && dropdownVal.values && dropdownVal.Brand !== 'Brand' && dropdownVal.Brand !== 'Other' && dropdownVal.values !== 'Select') {
+      console.log('hello1');
+      axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.893791%2035.501778&name=${dropdownVal.Brand}%20${dropdownVal.values}&radius=1500&key=${REACT_APP_API_KEY}`)
+        .catch((error) => {
+          console.log(error);
+        }).then((respone) => {
+          console.log('response', respone);
+        });
+      this.flag = 1;
+    } else if (dropdownVal.Brand && dropdownVal.Brand === 'Other' && dropdownVal.values && dropdownVal.values !== 'Select') {
+      console.log('hello5');
+      axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.893791%2035.501778&name=Car%20${dropdownVal.values}&radius=1500&key=${REACT_APP_API_KEY}`)
+        .catch((error) => {
+          console.log(error);
+        }).then((respone) => {
+          console.log('response', respone);
+        });
+    } else if (dropdownVal.values && (!dropdownVal.Brand || dropdownVal.Brand === 'Brand')) {
+      // do nothing, just exit
+    } else if (dropdownVal.values && dropdownVal.values !== 'Select') {
+      console.log('hello2');
+      axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.893791%2035.501778&name=${dropdownVal.values}&radius=1500&key=${REACT_APP_API_KEY}`).catch((error) => {
+        console.log(error);
+      }).then((respone) => {
+        console.log('response', respone);
+      });
     }
   }
 
