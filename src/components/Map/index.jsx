@@ -3,13 +3,12 @@ import './index.css';
 import {
   Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
-import Geocode from 'react-geocode';
 
 require('dotenv').config();
 const axios = require('axios');
 
 const { REACT_APP_API_KEY } = process.env;
-Geocode.setApiKey(REACT_APP_API_KEY);
+
 
 const style = {
   width: '40%',
