@@ -3,9 +3,12 @@ import './index.css';
 import {
   Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
+
 import nearbySearch from '../../utils/api';
 
+
 require('dotenv').config();
+// const axios = require('axios');
 
 const { REACT_APP_API_KEY } = process.env;
 
@@ -15,6 +18,7 @@ const style = {
 };
 
 class GMap extends React.Component {
+
   static flag;
 
   state = {
@@ -35,8 +39,6 @@ class GMap extends React.Component {
       error => console.log(error),
     );
   }
-
-
     getInfo = (dropdownVal) => {
       if (dropdownVal.values) {
         this.fetchingInfoWithBrand(dropdownVal);
@@ -59,7 +61,6 @@ class GMap extends React.Component {
         this.fetchBrandDiffThanOther(dropdownVal);
       }
     }
-
 
     fetchOtherAsBrand(dropdownVal) {
       if (dropdownVal.Brand === 'Other') {

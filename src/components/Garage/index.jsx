@@ -13,7 +13,9 @@ class Garage extends React.Component {
 
 maintenanceModifier = (event) => {
   const { value } = event.target;
+
   this.setState({ values: value });
+
 }
 
 brandModifier = (event) => {
