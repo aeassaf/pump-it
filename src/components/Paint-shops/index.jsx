@@ -7,12 +7,15 @@ import obj from '../Dropdown/content';
 
 class PaintShops extends React.Component {
   state={
-    paintType: null,
+
+    values: null,
+
   };
 
 stateModifier = (event) => {
   const { value } = event.target;
-  this.setState({ paintType: value });
+  this.setState({ values: value });
+
 }
 
 

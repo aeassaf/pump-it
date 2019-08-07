@@ -3,13 +3,14 @@ import './index.css';
 import {
   Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
-import Geocode from 'react-geocode';
+
+import nearbySearch from '../../utils/api';
+
 
 require('dotenv').config();
 // const axios = require('axios');
 
 const { REACT_APP_API_KEY } = process.env;
-Geocode.setApiKey(REACT_APP_API_KEY);
 
 const style = {
   width: '40%',
@@ -17,73 +18,152 @@ const style = {
 };
 
 class GMap extends React.Component {
-  state={
-    latitude: null,
-    longitude: null,
-    value: null,
-  }
+
+  static flag;
+
+  state = {
+    userLatitude: null,
+    userLongitude: null,
+    conditionValue: null,
+    conditionBrand: null,
+  };
 
   componentWillMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.setState({ latitude: position.coords.latitude, longitude: position.coords.longitude });
+        this.setState({
+          userLatitude: position.coords.latitude,
+          userLongitude: position.coords.longitude,
+        });
       },
       error => console.log(error),
     );
   }
-
-  // axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.893791%2035.501778&name=BMW%20Garage&type=garage&radius=1500&key=AIzaSyAQGrPwXrL_frF93kNy2cVXNJ0vDR5pP6I', { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     }).then((respone) => {
-  //       console.log('response', respone);
-  //     });
-  // }
-
-  getInfo = (dropdownVal) => {
-    if (dropdownVal && dropdownVal !== this.state.value) {
-      if (dropdownVal.Brand) {
-        console.log(dropdownVal);
-      } else { console.log('exception'); }
+    getInfo = (dropdownVal) => {
+      if (dropdownVal.values) {
+        this.fetchingInfoWithBrand(dropdownVal);
+        this.fetchingInfoWithoutBrand(dropdownVal);
+      }
     }
-  }
 
-  render() {
-    const { getDropDownValue } = this.props;
-    this.getInfo(getDropDownValue);
+    fetchingInfoWithBrand(dropdownVal) {
+      console.log(`${nearbySearch}${this.state.userLatitude}%20${
+        this.state.userLongitude
+      }&name=${dropdownVal.Brand}%20${
+        dropdownVal.values
+      }&radius=10000&key=${REACT_APP_API_KEY}`);
+      if (
+        dropdownVal.Brand
+        && dropdownVal.Brand !== 'Brand'
+        && dropdownVal.values !== 'Select'
+        && (this.state.conditionBrand !== dropdownVal.Brand || this.state.conditionValue !== dropdownVal.values)) {
+        this.fetchOtherAsBrand(dropdownVal);
+        this.fetchBrandDiffThanOther(dropdownVal);
+      }
+    }
 
-    return (
-      <div>
+    fetchOtherAsBrand(dropdownVal) {
+      if (dropdownVal.Brand === 'Other') {
+        fetch(
+          `${nearbySearch}${this.state.userLatitude}%20${
+            this.state.userLongitude
+          }&name=Car%20${
+            dropdownVal.values
+          }&radius=10000&key=${REACT_APP_API_KEY}`,
+        )
+          .then(response => response.json())
+          .then(json => this.setState({
+            userLatitude: json.results[0].geometry.location.lat,
+            userLongitude: json.results[0].geometry.location.lng,
+            conditionValue: dropdownVal.values,
+            conditionBrand: dropdownVal.Brand,
+          }))
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
 
-        <Map
-          className="map_margin"
-          google={this.props.google}
-          style={style}
-          center={{ lat: this.state.latitude, lng: this.state.longitude }}
-          zoom={12}
-          onClick={this.onMapClicked}
-        >
+    fetchBrandDiffThanOther(dropdownVal) {
+      if (dropdownVal.values !== 'Other') {
+        fetch(
+          `${nearbySearch}${this.state.userLatitude}%20${
+            this.state.userLongitude
+          }&name=${dropdownVal.Brand}%20${
+            dropdownVal.values
+          }&radius=10000&key=${REACT_APP_API_KEY}`,
+        )
+          .then(response => response.json())
+          .then(json => this.setState({
+            userLatitude: json.results[0].geometry.location.lat,
+            userLongitude: json.results[0].geometry.location.lng,
+            conditionValue: dropdownVal.values,
+            conditionBrand: dropdownVal.Brand,
+          }))
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
 
-          <Marker
-            onClick={this.onMarkerClick}
-            name="Current location"
-            position={{ lat: this.state.latitude, lng: this.state.longitude }}
-          />
+    fetchingInfoWithoutBrand(dropdownVal) {
+      if (dropdownVal.values !== 'Select' && !dropdownVal.flag && this.state.conditionValue !== dropdownVal.values) {
+        console.log('hello');
+        fetch(
+          `${nearbySearch}${this.state.userLatitude}%20${
+            this.state.userLongitude
+          }&name=${dropdownVal.values}&type=car&radius=10000&key=${REACT_APP_API_KEY}`,
+        )
+          .then(response => response.json())
+          .then(json => this.setState({
+            userLatitude: json.results[0].geometry.location.lat,
+            userLongitude: json.results[0].geometry.location.lng,
+            conditionValue: dropdownVal.values,
+          }))
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
 
-          <InfoWindow onClose={this.onInfoWindowClose}>
-            <div>
-              <h1>hi</h1>
-            </div>
-          </InfoWindow>
-        </Map>
 
-      </div>
+    render() {
+      const { getDropDownValue } = this.props;
+      this.getInfo(getDropDownValue);
 
-    );
-  }
+      return (
+        <div>
+          <Map
+            className="map_margin"
+            google={this.props.google}
+            style={style}
+            center={{
+              lat: this.state.userLatitude,
+              lng: this.state.userLongitude,
+            }}
+            zoom={12}
+            onClick={this.onMapClicked}
+          >
+            <Marker
+              onClick={this.onMarkerClick}
+              name="Current location"
+              position={{
+                lat: this.state.userLatitude,
+                lng: this.state.userLongitude,
+              }}
+            />
+
+            <InfoWindow onClose={this.onInfoWindowClose}>
+              <div>
+                <h1>hi</h1>
+              </div>
+            </InfoWindow>
+          </Map>
+        </div>
+      );
+    }
 }
 
-
 export default GoogleApiWrapper({
-  apiKey: (REACT_APP_API_KEY),
+  apiKey: REACT_APP_API_KEY,
 })(GMap);

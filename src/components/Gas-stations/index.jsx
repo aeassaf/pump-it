@@ -6,12 +6,16 @@ import obj from '../Dropdown/content';
 
 class gasStations extends React.Component {
     state={
-      gasType: null,
+
+      values: null,
+
     };
 
 stateModifier = (event) => {
   const { value } = event.target;
-  this.setState({ gasType: value });
+
+  this.setState({ values: value });
+
 }
 
 render() {
