@@ -4,9 +4,9 @@ import {
   Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
 import Geocode from 'react-geocode';
-import { dropDownContent } from '../Dropdown';
 
 require('dotenv').config();
+// const axios = require('axios');
 
 const { REACT_APP_API_KEY } = process.env;
 Geocode.setApiKey(REACT_APP_API_KEY);
@@ -16,16 +16,7 @@ const style = {
   height: '50%',
 };
 
-
 class GMap extends React.Component {
-  static contextType = dropDownContent;
-
-
-static dropvalue;
-
-static brandValue;
-
-
   state={
     latitude: null,
     longitude: null,
@@ -41,30 +32,25 @@ static brandValue;
     );
   }
 
-  componentDidUpdate() {
-    if (this.dropvalue && this.dropvalue !== this.state.value) {
-      Geocode.fromAddress(`Nearest ${this.brandValue} ${this.dropvalue} `).then(
-        (response) => {
-          const { lat, lng } = response.results[0].geometry.location;
-          console.log(lat, lng);
-          this.setState({ latitude: lat, longitude: lng, value: this.dropvalue });
-        },
-        (error) => {
-          console.error(error);
-        },
-      );
+  // axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.893791%2035.501778&name=BMW%20Garage&type=garage&radius=1500&key=AIzaSyAQGrPwXrL_frF93kNy2cVXNJ0vDR5pP6I', { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     }).then((respone) => {
+  //       console.log('response', respone);
+  //     });
+  // }
+
+  getInfo = (dropdownVal) => {
+    if (dropdownVal && dropdownVal !== this.state.value) {
+      if (dropdownVal.Brand) {
+        console.log(dropdownVal);
+      } else { console.log('exception'); }
     }
   }
 
   render() {
-    try {
-      const { current_value, current_brand } = this.context;
-      this.dropvalue = current_value;
-      this.brandValue = current_brand;
-    } catch (e) {
-      console.error(e);
-    }
-
+    const { getDropDownValue } = this.props;
+    this.getInfo(getDropDownValue);
 
     return (
       <div>

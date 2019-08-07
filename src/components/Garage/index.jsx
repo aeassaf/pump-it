@@ -3,24 +3,31 @@ import './index.css';
 import GMap from '../Map/index';
 import Dropdown from '../Dropdown';
 import obj from '../Dropdown/content';
-import Brands from '../Dropdown/Brand';
 
 class Garage extends React.Component {
-state ={}
+    state={
+      Brand: 'undefined',
+      MaintenanceType: null,
+    };
 
+maintenanceModifier = (event) => {
+  const { value } = event.target;
+  this.setState({ MaintenanceType: value });
+}
+
+brandModifier = (event) => {
+  const { value } = event.target;
+  this.setState({ Brand: value });
+}
 
 render() {
   return (
     <div className="pagestyle_garage">
       <div className="flex_container_map">
 
-        <Brands content={obj.Brand}>
-          <Dropdown content={obj.TypeofMaintenance}>
-            <GMap />
-          </Dropdown>
-        </Brands>
-
-
+        <Dropdown content={obj.Brand} currentValue={this.brandModifier} />
+        <Dropdown content={obj.TypeofMaintenance} currentValue={this.maintenanceModifier} />
+        <GMap getDropDownValue={{ ...this.state }} />
       </div>
     </div>
   );

@@ -6,24 +6,31 @@ import obj from '../Dropdown/content';
 
 
 class PaintShops extends React.Component {
-  state={};
+  state={
+    paintType: null,
+  };
+
+stateModifier = (event) => {
+  const { value } = event.target;
+  this.setState({ paintType: value });
+}
 
 
-  render() {
-    return (
-      <div className="pagestyle_paint">
+render() {
+  return (
 
-        <div className="flex_container_map">
-          <Dropdown content={obj.Paintshops}>
+    <div className="pagestyle_paint">
 
-            <GMap />
-          </Dropdown>
-        </div>
-
+      <div className="flex_container_map">
+        <Dropdown content={obj.Paintshops} currentValue={this.stateModifier} />
+        <GMap getDropDownValue={{ ...this.state }} />
 
       </div>
-    );
-  }
+
+
+    </div>
+  );
+}
 }
 
 
