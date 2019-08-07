@@ -8,6 +8,7 @@ class Garage extends React.Component {
     state={
       Brand: null,
       values: null,
+      flag: 1,
     };
 
 maintenanceModifier = (event) => {

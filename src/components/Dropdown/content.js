@@ -1,8 +1,8 @@
 const obj = {
-  Paintshops: ['Select', 'Body Repair', 'Stickers', 'Interior', 'Wrap'],
+  Paintshops: ['Select', 'Body Repair', 'Interior', 'Wrap'],
   Brand: ['Brand', 'BMW', 'Citroen', 'Mercedes', 'Dacia', 'Other'],
-  TypeofMaintenance: ['Select', 'Engine', 'Exhaust', 'Oil Change', 'Checkup'],
-  Gas: ['Select', 'Refuel', 'Car Wash'],
+  TypeofMaintenance: ['Select', 'Garage', 'Dealer'],
+  Gas: ['Select', 'Gas Station', 'Car Wash'],
 };
 
 export default obj;
