@@ -6,21 +6,19 @@ import obj from '../Dropdown/content';
 
 class Garage extends React.Component {
     state={
-      Brand: null,
-      values: null,
-      flag: 1,
+      brand: null,
+      maintenanceType: null,
     };
 
 maintenanceModifier = (event) => {
   const { value } = event.target;
 
-  this.setState({ values: value });
-
+  this.setState({ maintenanceType: value });
 }
 
 brandModifier = (event) => {
   const { value } = event.target;
-  this.setState({ Brand: value });
+  this.setState({ brand: value });
 }
 
 render() {

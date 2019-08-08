@@ -3,9 +3,7 @@ import './index.css';
 import {
   Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
-
 import nearbySearch from '../../utils/api';
-
 
 require('dotenv').config();
 
@@ -21,6 +19,7 @@ class GMap extends React.Component {
     userLatitude: null,
     userLongitude: null,
     conditionValue: null,
+    conditionMaintenance: null,
     conditionBrand: null,
     coordinates: null,
   };
@@ -38,93 +37,45 @@ class GMap extends React.Component {
   }
 
     getInfo = (dropdownVal) => {
-      if (dropdownVal.values) {
-        this.fetchingInfoWithBrand(dropdownVal);
-        this.fetchingInfoWithoutBrand(dropdownVal);
+      if ((dropdownVal.maintenanceType
+           && dropdownVal.brand
+            && (dropdownVal.maintenanceType !== this.state.conditionMaintenance || dropdownVal.brand !== this.state.conditionBrand)
+            && dropdownVal.maintenanceType !== 'Select' && dropdownVal.brand !== 'Brand')
+            || (dropdownVal.values && dropdownVal.values !== this.state.conditionValue && dropdownVal.values !== 'Select')) {
+        this.fetchingInfo(dropdownVal);
       }
     }
 
-    fetchingInfoWithBrand(dropdownVal) {
-      if (
-        dropdownVal.Brand
-        && dropdownVal.Brand !== 'Brand'
-        && dropdownVal.values !== 'Select'
-        && (this.state.conditionBrand !== dropdownVal.Brand || this.state.conditionValue !== dropdownVal.values)) {
-        this.fetchOtherAsBrand(dropdownVal);
-        this.fetchBrandDiffThanOther(dropdownVal);
-      }
-    }
-
-    fetchOtherAsBrand(dropdownVal) {
+    fetchingInfo(dropdownVal) {
       const apiContent = [];
-      if (dropdownVal.Brand === 'Other') {
-        fetch(
-          `${nearbySearch}${this.state.userLatitude}%20${
-            this.state.userLongitude
-          }&name=Car%20${
-            dropdownVal.values
-          }&radius=10000&key=${REACT_APP_API_KEY}`,
-        )
-          .then(response => response.json())
-          .then((json) => {
-            json.results.map(response => apiContent.push(response.geometry));
-
+      this.fetching(dropdownVal)
+        .then(response => response.json())
+        .then((json) => {
+          json.results.map(response => apiContent.push(response.geometry));
+          if (dropdownVal.brand) {
             this.setState({
-
-              conditionValue: dropdownVal.values,
-              conditionBrand: dropdownVal.Brand,
+              conditionMaintenance: dropdownVal.maintenanceType,
+              conditionBrand: dropdownVal.brand,
               coordinates: apiContent,
             });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    }
-
-    fetchBrandDiffThanOther(dropdownVal) {
-      const apiContent = [];
-      if (dropdownVal.values !== 'Other') {
-        fetch(
-          `${nearbySearch}${this.state.userLatitude}%20${
-            this.state.userLongitude
-          }&name=${dropdownVal.Brand}%20${
-            dropdownVal.values
-          }&radius=10000&key=${REACT_APP_API_KEY}`,
-        )
-          .then(response => response.json())
-          .then((json) => {
-            json.results.map(response => apiContent.push(response.geometry));
-
-            this.setState({
-              conditionValue: dropdownVal.values,
-              conditionBrand: dropdownVal.Brand,
-              coordinates: apiContent,
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    }
-
-    fetchingInfoWithoutBrand(dropdownVal) {
-      const apiContent = [];
-      if (dropdownVal.values !== 'Select' && !dropdownVal.flag && this.state.conditionValue !== dropdownVal.values) {
-        fetch(
-          `${nearbySearch}${this.state.userLatitude}%20${
-            this.state.userLongitude
-          }&name=${dropdownVal.values}&type=car&radius=10000&key=${REACT_APP_API_KEY}`,
-        )
-          .then(response => response.json())
-          .then((json) => {
-            json.results.map(response => apiContent.push(response.geometry));
+          } else if (dropdownVal.values) {
             this.setState({ conditionValue: dropdownVal.values, coordinates: apiContent });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    fetching(dropdownVal) {
+      if (dropdownVal.brand === 'Other') {
+        dropdownVal.brand = 'Car';
       }
+      return (
+        fetch(`${nearbySearch}${this.state.userLatitude}%20${
+          this.state.userLongitude
+        }&name=${dropdownVal.brand ? `${dropdownVal.brand}%20` : ''}${
+          (dropdownVal.values && dropdownVal.values) || (dropdownVal.maintenanceType && dropdownVal.maintenanceType)}&radius=10000&key=${REACT_APP_API_KEY}`));
     }
 
 
@@ -138,7 +89,6 @@ class GMap extends React.Component {
           <Marker
             key={index}
             onClick={this.onMarkerClick}
-            name="Current location"
             position={{
               lat: value.location.lat,
               lng: value.location.lng,
