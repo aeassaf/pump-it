@@ -21,7 +21,10 @@ class GMap extends React.Component {
     conditionValue: null,
     conditionMaintenance: null,
     conditionBrand: null,
-    coordinates: null,
+    showingInfoWindow: null,
+    APIContent: null,
+    selectedPlace: {},
+    activeMarker: {},
   };
 
   componentWillMount() {
@@ -35,6 +38,22 @@ class GMap extends React.Component {
       error => console.log(error),
     );
   }
+
+   onMarkerClick = (props, marker) => (
+     this.setState({
+       selectedPlace: props,
+       activeMarker: marker,
+       showingInfoWindow: true,
+     }))
+
+   onMapClicked = () => {
+     if (this.state.showingInfoWindow) {
+       this.setState({
+         showingInfoWindow: false,
+         activeMarker: null,
+       });
+     }
+   };
 
     getInfo = (dropdownVal) => {
       if ((dropdownVal.maintenanceType
@@ -51,15 +70,20 @@ class GMap extends React.Component {
       this.fetching(dropdownVal)
         .then(response => response.json())
         .then((json) => {
-          json.results.map(response => apiContent.push(response.geometry));
+          json.results.map(response => (apiContent.push(response)
+          ));
           if (dropdownVal.brand) {
             this.setState({
               conditionMaintenance: dropdownVal.maintenanceType,
               conditionBrand: dropdownVal.brand,
-              coordinates: apiContent,
+              APIContent: apiContent,
             });
           } else if (dropdownVal.values) {
-            this.setState({ conditionValue: dropdownVal.values, coordinates: apiContent });
+            this.setState({
+              conditionValue: dropdownVal.values,
+              coordinates: apiContent.geometry,
+              APIContent: apiContent,
+            });
           }
         })
         .catch((error) => {
@@ -83,19 +107,55 @@ class GMap extends React.Component {
       const { getDropDownValue } = this.props;
       this.getInfo(getDropDownValue);
       let markers;
+      let infoWindows;
 
-      if (this.state.coordinates) {
-        markers = this.state.coordinates.map((value, index) => (
+      if (this.state.APIContent) {
+        markers = this.state.APIContent.map((value, index) => (
           <Marker
+            name={value.name}
             key={index}
             onClick={this.onMarkerClick}
             position={{
-              lat: value.location.lat,
-              lng: value.location.lng,
+              lat: value.geometry.location.lat,
+              lng: value.geometry.location.lng,
             }}
+            rating={value.rating}
+            place_id={value.place_id}
+            opening_hours={value.opening_hours}
+            user_ratings_total={value.user_ratings_total}
           />
         ));
+
+        infoWindows = (
+          <InfoWindow onClose={this.onInfoWindowClose} visible={this.state.showingInfoWindow} marker={this.state.activeMarker}>
+            <div>
+              <h2>{this.state.selectedPlace.name}</h2>
+              <p>
+Rating:
+                {' '}
+                {this.state.selectedPlace.rating}
+                {' '}
+Stars
+              </p>
+              <p>
+User Ratings Total:
+                {' '}
+                {this.state.selectedPlace.user_ratings_total}
+                {' '}
+Person(s)
+              </p>
+              <p>
+Status:
+                {' '}
+                {this.state.selectedPlace.opening_hours ? 'Open' : this.state.selectedPlace.opening_hours === false ? 'Çlosed' : 'Unknown'}
+              </p>
+
+              <a href={`https://www.google.com/maps/place/?q=place_id:${this.state.selectedPlace.place_id}`}>Link</a>
+            </div>
+          </InfoWindow>
+        );
       }
+
 
       return (
         <div>
@@ -103,17 +163,15 @@ class GMap extends React.Component {
             className="map_margin map"
             google={this.props.google}
             style={style}
+            onClick={this.onMapClicked}
             center={{
               lat: this.state.userLatitude,
               lng: this.state.userLongitude,
             }}
             zoom={12}
-            onClick={this.onMapClicked}
           >
 
             <Marker
-
-              onClick={this.onMarkerClick}
               name="Your location"
               position={{
                 lat: this.state.userLatitude,
@@ -125,18 +183,14 @@ class GMap extends React.Component {
             />
 
             {markers}
+            {infoWindows}
 
-
-            <InfoWindow onClose={this.onInfoWindowClose}>
-              <div>
-                <h1>hi</h1>
-              </div>
-            </InfoWindow>
           </Map>
         </div>
       );
     }
 }
+
 
 export default GoogleApiWrapper({
   apiKey: REACT_APP_API_KEY,
