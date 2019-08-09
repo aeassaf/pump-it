@@ -15,7 +15,6 @@ stateModifier = (event) => {
   const { value } = event.target;
 
   this.setState({ values: value });
-
 }
 
 render() {
