@@ -25,6 +25,7 @@ class GMap extends React.Component {
     APIContent: null,
     selectedPlace: {},
     activeMarker: {},
+    loading: false,
   };
 
   componentWillMount() {
@@ -56,11 +57,14 @@ class GMap extends React.Component {
    };
 
     getInfo = (dropdownVal) => {
-      if ((dropdownVal.maintenanceType
+      if (((dropdownVal.maintenanceType
            && dropdownVal.brand
             && (dropdownVal.maintenanceType !== this.state.conditionMaintenance || dropdownVal.brand !== this.state.conditionBrand)
             && dropdownVal.maintenanceType !== 'Select' && dropdownVal.brand !== 'Brand')
-            || (dropdownVal.values && dropdownVal.values !== this.state.conditionValue && dropdownVal.values !== 'Select')) {
+            || (dropdownVal.values && dropdownVal.values !== this.state.conditionValue && dropdownVal.values !== 'Select'))) {
+        if (this.state.loading === false) {
+          this.setState({ loading: true });
+        }
         this.fetchingInfo(dropdownVal);
       }
     }
@@ -77,12 +81,13 @@ class GMap extends React.Component {
               conditionMaintenance: dropdownVal.maintenanceType,
               conditionBrand: dropdownVal.brand,
               APIContent: apiContent,
+              loading: false,
             });
           } else if (dropdownVal.values) {
             this.setState({
               conditionValue: dropdownVal.values,
-              coordinates: apiContent.geometry,
               APIContent: apiContent,
+              loading: false,
             });
           }
         })
@@ -108,6 +113,11 @@ class GMap extends React.Component {
       this.getInfo(getDropDownValue);
       let markers;
       let infoWindows;
+      let loadIcon;
+
+      if (this.state.loading) {
+        loadIcon = <div className="loading" />;
+      }
 
       if (this.state.APIContent) {
         markers = this.state.APIContent.map((value, index) => (
@@ -171,6 +181,7 @@ Status:
             zoom={12}
           >
 
+
             <Marker
               name="Your location"
               position={{
@@ -182,6 +193,7 @@ Status:
               }}
             />
 
+            {loadIcon}
             {markers}
             {infoWindows}
 

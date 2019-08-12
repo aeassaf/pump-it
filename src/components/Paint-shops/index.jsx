@@ -15,7 +15,6 @@ class PaintShops extends React.Component {
 stateModifier = (event) => {
   const { value } = event.target;
   this.setState({ values: value });
-
 }
 
 
