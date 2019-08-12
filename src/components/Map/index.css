@@ -1,14 +1,7 @@
-.flex_container_map {
+.flexContainerMap {
   display: flex;
   justify-content: center;
-  height: 50%;
   align-items: center;
-  align-content: center;
-
-  margin-right: 800px;
-}
-
-.map_margin {
 }
 
 .loading {
@@ -18,4 +11,42 @@
   position: relative;
   background-repeat: no-repeat;
   margin: 100px 0px 0px 12.5%;
+}
+
+.flexItemMap {
+  margin-right: 300px;
+  margin-bottom: calc(50vh - 56px);
+  color: rgb(173, 160, 160);
+}
+
+@media only screen and (min-width: 300px) and (max-width: 699px) {
+  .flexContainerMap {
+    flex-direction: column;
+  }
+
+  .flexItemMap {
+    margin-right: 25px;
+    margin-bottom: 200px;
+  }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 1023px) {
+  .flexContainerMap {
+    flex-direction: column;
+  }
+
+  .flexItemMap {
+    margin-right: 330px;
+    color: white;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+  .flexContainerMap {
+    flex-direction: column;
+  }
+
+  .flexItemMap {
+    color: white;
+  }
 }

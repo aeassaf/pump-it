@@ -4,7 +4,6 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  overflow-y: auto;
 }
 
 .flexItemDescription {
@@ -13,7 +12,6 @@
 }
 
 .backgroundHome {
-  width: 100%;
   height: calc(100vh - 56px);
   background-image: url(../../images/home.jpg);
   background-size: cover;
@@ -47,15 +45,18 @@
   background-color: rgba(255, 0, 0, 0.1);
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (min-width: 300px) and (max-width: 799px) {
   .flexContainer {
     flex-direction: column;
   }
 
+  .smaller {
+    font-size: 15px;
+  }
+
   .buttonstyle {
-    width: 60%;
-    height: 80%;
-    margin-top: 10px;
+    width: 300px;
+    height: 100px;
   }
 
   .backgroundHome {
@@ -68,34 +69,13 @@
   }
 }
 
-@media only screen and (max-width: 320px) {
-  .flexContainer {
-    flex-direction: column;
-  }
-
-  .buttonstyle {
-    width: 60%;
-    height: 80%;
-    margin-top: 5px;
-  }
-
-  .backgroundHome {
-    background-image: none;
-    background-color: black;
-  }
-
-  .flexItemDescription {
-    padding-top: 0px;
-  }
-}
-
-@media only screen and (max-width: 800px) {
+@media only screen and (min-width: 800px) and (max-width: 1024px) {
   .flexContainer {
     flex-direction: column;
   }
 
   .flexItemDescription {
-    padding-top: 0px;
+    padding-top: 50px;
   }
 
   .backgroundHome {
@@ -104,8 +84,7 @@
   }
 
   .buttonstyle {
-    margin-top: 10px;
-    height: 150px;
-    width: 60%;
+    width: 300px;
+    height: 200px;
   }
 }
