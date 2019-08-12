@@ -5,30 +5,28 @@ import Dropdown from '../Dropdown';
 import obj from '../Dropdown/content';
 
 class gasStations extends React.Component {
-    state={
+  state = {
+    values: null,
+  };
 
-      values: null,
+  stateModifier = (event) => {
+    const { value } = event.target;
 
-    };
+    this.setState({ values: value });
+  };
 
-stateModifier = (event) => {
-  const { value } = event.target;
-
-  this.setState({ values: value });
-}
-
-render() {
-  return (
-    <div className="pagestyle_gas">
-      <div className="flex_container_map">
-        <Dropdown content={obj.Gas} currentValue={this.stateModifier} />
-        <GMap getDropDownValue={{ ...this.state }} />
-
+  render() {
+    return (
+      <div className="pagestyle_gas flexContainerMap">
+        <div className="lessMargin">
+          <Dropdown content={obj.Gas} currentValue={this.stateModifier} />
+        </div>
+        <div className="flexItemMap">
+          <GMap getDropDownValue={{ ...this.state }} />
+        </div>
       </div>
-
-    </div>
-  );
-}
+    );
+  }
 }
 
 export default gasStations;

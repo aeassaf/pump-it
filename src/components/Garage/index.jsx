@@ -5,34 +5,37 @@ import Dropdown from '../Dropdown';
 import obj from '../Dropdown/content';
 
 class Garage extends React.Component {
-    state={
-      brand: null,
-      maintenanceType: null,
-    };
+  state = {
+    brand: null,
+    maintenanceType: null,
+  };
 
-maintenanceModifier = (event) => {
-  const { value } = event.target;
+  maintenanceModifier = (event) => {
+    const { value } = event.target;
 
-  this.setState({ maintenanceType: value });
-}
+    this.setState({ maintenanceType: value });
+  };
 
-brandModifier = (event) => {
-  const { value } = event.target;
-  this.setState({ brand: value });
-}
+  brandModifier = (event) => {
+    const { value } = event.target;
+    this.setState({ brand: value });
+  };
 
-render() {
-  return (
-    <div className="pagestyle_garage">
-      <div className="flex_container_map">
-
-        <Dropdown content={obj.Brand} currentValue={this.brandModifier} />
-        <Dropdown content={obj.TypeofMaintenance} currentValue={this.maintenanceModifier} />
-        <GMap getDropDownValue={{ ...this.state }} />
+  render() {
+    return (
+      <div className="pagestyle_garage flexContainerMap">
+        <div className="lessMargin">
+          <Dropdown content={obj.Brand} currentValue={this.brandModifier} />
+        </div>
+        <div className="lesserMargin">
+          <Dropdown content={obj.TypeofMaintenance} currentValue={this.maintenanceModifier} />
+        </div>
+        <div className="flexItemMap">
+          <GMap getDropDownValue={{ ...this.state }} />
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 }
 
 export default Garage;
