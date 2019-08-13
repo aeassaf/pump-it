@@ -9,31 +9,31 @@ require('dotenv').config();
 
 const { REACT_APP_API_KEY } = process.env;
 
-const mq1 = window.matchMedia('(min-width: 300px) and (max-width: 699px)');
-const mq2 = window.matchMedia('(min-width: 700px) and (max-width: 1023px)');
+const mq1 = window.matchMedia('(min-width: 300px) and (max-width: 800px)');
+const mq2 = window.matchMedia('(min-width: 800px) and (max-width: 1023px)');
 const mq3 = window.matchMedia('(min-width: 1024px) and (max-width: 1024px)');
 
 let style;
 
 if (mq1.matches) {
   style = {
-    width: '300px',
-    height: '200px',
+    width: '50vw',
+    height: '70vw',
   };
 } else if (mq2.matches) {
   style = {
-    width: '600px',
-    height: '300px',
+    width: '50vw',
+    height: '30vw',
   };
 } else if (mq3.matches) {
   style = {
-    width: '600px',
-    height: '400px',
+    width: '50vw',
+    height: '50vw',
   };
 } else {
   style = {
-    width: '700px',
-    height: '400px',
+    width: '50vw',
+    height: '25vw',
   };
 }
 
@@ -166,35 +166,23 @@ class GMap extends React.Component {
       ));
 
       if (this.state.selectedPlace.position) {
-        if (
-          navigator.userAgent.match(/iPhone/i)
-          || navigator.userAgent.match(/iPad/i)
-          || navigator.userAgent.match(/iPod/i)
-        ) {
-          locationAvailibilty = (
-            <a
-              href={`http://maps.apple.com/?q=${
-                this.state.selectedPlace.position.lat
-              },${this.state.selectedPlace.position.lng}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Link
-            </a>
-          );
-        } else {
-          locationAvailibilty = (
-            <a
-              href={`https://maps.google.com/maps/place/?q=${
-                this.state.selectedPlace.position.lat
-              },${this.state.selectedPlace.position.lng}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Link
-            </a>
-          );
-        }
+        locationAvailibilty = (
+          <a
+            href={`http://maps.${
+              navigator.userAgent.match(/iPhone/i)
+              || navigator.userAgent.match(/iPad/i)
+              || navigator.userAgent.match(/iPod/i)
+                ? 'apple'
+                : 'google'
+            }.com/?q=${this.state.selectedPlace.position.lat},${
+              this.state.selectedPlace.position.lng
+            }`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Link
+          </a>
+        );
       }
 
       infoWindows = (
@@ -231,36 +219,37 @@ Person(s)
         </InfoWindow>
       );
     }
-    console.log(this.state.selectedPlace.position);
     return (
       <div>
-        The flag indicates your current location
         {loadIcon}
-        <Map
-          style={style}
-          google={this.props.google}
-          onClick={this.onMapClicked}
-          center={{
-            lat: this.state.userLatitude,
-            lng: this.state.userLongitude,
-          }}
-          zoom={12}
-        >
-          <Marker
-            name="Your location"
-            position={{
+        Flag: Your current location
+        <div className="wrapMap">
+          <Map
+            style={style}
+            google={this.props.google}
+            onClick={this.onMapClicked}
+            center={{
               lat: this.state.userLatitude,
               lng: this.state.userLongitude,
             }}
-            icon={{
-              url:
-                'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-            }}
-          />
+            zoom={12}
+          >
+            <Marker
+              name="Your location"
+              position={{
+                lat: this.state.userLatitude,
+                lng: this.state.userLongitude,
+              }}
+              icon={{
+                url:
+                  'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+              }}
+            />
 
-          {markers}
-          {infoWindows}
-        </Map>
+            {markers}
+            {infoWindows}
+          </Map>
+        </div>
       </div>
     );
   }
