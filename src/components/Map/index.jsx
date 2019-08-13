@@ -166,17 +166,35 @@ class GMap extends React.Component {
       ));
 
       if (this.state.selectedPlace.position) {
-        locationAvailibilty = (
-          <a
-            href={`https://maps.google.com/maps/place/?q=${this.state.selectedPlace.position.lat},${
-              this.state.selectedPlace.position.lng
-            }`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Link
-          </a>
-        );
+        if (
+          navigator.userAgent.match(/iPhone/i)
+          || navigator.userAgent.match(/iPad/i)
+          || navigator.userAgent.match(/iPod/i)
+        ) {
+          locationAvailibilty = (
+            <a
+              href={`http://maps.apple.com/?q=${
+                this.state.selectedPlace.position.lat
+              },${this.state.selectedPlace.position.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Link
+            </a>
+          );
+        } else {
+          locationAvailibilty = (
+            <a
+              href={`https://maps.google.com/maps/place/?q=${
+                this.state.selectedPlace.position.lat
+              },${this.state.selectedPlace.position.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Link
+            </a>
+          );
+        }
       }
 
       infoWindows = (
