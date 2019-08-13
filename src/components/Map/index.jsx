@@ -142,6 +142,40 @@ class GMap extends React.Component {
     let markers;
     let infoWindows;
     let loadIcon;
+    let mapsLink;
+
+    if (
+      navigator.userAgent.match(/Android/i)
+      || navigator.userAgent.match(/webOS/i)
+      || navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPod/i)
+      || navigator.userAgent.match(/BlackBerry/i)
+      || navigator.userAgent.match(/Windows Phone/i)
+    ) {
+      mapsLink = (
+        <a
+          href={`https://maps.google.com/maps/place/
+          }`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Link
+        </a>
+      );
+    } else {
+      mapsLink = (
+        <a
+          href={`https://maps.google.com/maps/place/?q=place_id:${
+            this.state.selectedPlace.place_id
+          }`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Link
+        </a>
+      );
+    }
 
     if (this.state.loading) {
       loadIcon = <div>Loading...</div>;
@@ -194,15 +228,7 @@ Person(s)
                   : 'Unknown'}
             </p>
 
-            <a
-              href={`https://maps.google.com/maps/place/?q=place_id:${
-                this.state.selectedPlace.place_id
-              }`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Link
-            </a>
+            {mapsLink}
           </div>
         </InfoWindow>
       );
