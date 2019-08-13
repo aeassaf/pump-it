@@ -198,6 +198,8 @@ Person(s)
               href={`https://maps.google.com/maps/place/?q=place_id:${
                 this.state.selectedPlace.place_id
               }`}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Link
             </a>
