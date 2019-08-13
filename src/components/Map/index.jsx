@@ -9,9 +9,9 @@ require('dotenv').config();
 
 const { REACT_APP_API_KEY } = process.env;
 
-const mq1 = window.matchMedia('(min-width: 300px) and (max-width: 699px');
-const mq2 = window.matchMedia('(min-width: 700px) and (max-width: 1023px');
-const mq3 = window.matchMedia('(min-width: 1024px) and (max-width: 1024px');
+const mq1 = window.matchMedia('(min-width: 300px) and (max-width: 699px)');
+const mq2 = window.matchMedia('(min-width: 700px) and (max-width: 1023px)');
+const mq3 = window.matchMedia('(min-width: 1024px) and (max-width: 1024px)');
 
 let style;
 
@@ -142,6 +142,7 @@ class GMap extends React.Component {
     let markers;
     let infoWindows;
     let loadIcon;
+    let locationAvailibilty;
 
     if (this.state.loading) {
       loadIcon = <div>Loading...</div>;
@@ -164,6 +165,38 @@ class GMap extends React.Component {
         />
       ));
 
+      if (this.state.selectedPlace.position) {
+        if (
+          navigator.userAgent.match(/iPhone/i)
+          || navigator.userAgent.match(/iPad/i)
+          || navigator.userAgent.match(/iPod/i)
+        ) {
+          locationAvailibilty = (
+            <a
+              href={`http://maps.apple.com/?q=${
+                this.state.selectedPlace.position.lat
+              },${this.state.selectedPlace.position.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Link
+            </a>
+          );
+        } else {
+          locationAvailibilty = (
+            <a
+              href={`https://maps.google.com/maps/place/?q=${
+                this.state.selectedPlace.position.lat
+              },${this.state.selectedPlace.position.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Link
+            </a>
+          );
+        }
+      }
+
       infoWindows = (
         <InfoWindow
           onClose={this.onInfoWindowClose}
@@ -174,13 +207,13 @@ class GMap extends React.Component {
             <h2>{this.state.selectedPlace.name}</h2>
             <p>
               Rating:
-              {this.state.selectedPlace.rating}
+              {` ${this.state.selectedPlace.rating}`}
               {' '}
 Stars
             </p>
             <p>
               User Ratings Total:
-              {this.state.selectedPlace.user_ratings_total}
+              {` ${this.state.selectedPlace.user_ratings_total}`}
               {' '}
 Person(s)
             </p>
@@ -193,19 +226,12 @@ Person(s)
                   ? 'Çlosed'
                   : 'Unknown'}
             </p>
-
-            <a
-              href={`https://www.google.com/maps/place/?q=place_id:${
-                this.state.selectedPlace.place_id
-              }`}
-            >
-              Link
-            </a>
+            {locationAvailibilty}
           </div>
         </InfoWindow>
       );
     }
-
+    console.log(this.state.selectedPlace.position);
     return (
       <div>
         The flag indicates your current location

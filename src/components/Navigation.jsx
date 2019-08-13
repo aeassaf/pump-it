@@ -7,11 +7,11 @@ const Styles = styled.div`
     background-color: #222;
   }
   .navbar-brand {
-    color: #7f00ff;
+    color: #ffffff;
   }
 
   .navbar-brand:hover {
-    color: yellow;
+    color: orange;
   }
   .navbar-nav .nav-link {
     color: #bbb;
@@ -33,13 +33,16 @@ const Navigation = () => (
             <Nav.Link href="/">Home </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/gas">gas </Nav.Link>
+            <Nav.Link href="/gas">Gas </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/maintenance">maintenance </Nav.Link>
+            <Nav.Link href="/maintenance">Maintenance </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/paint-shops">paint-shops </Nav.Link>
+            <Nav.Link href="/paint-shops">Paint Shops </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="/about">About </Nav.Link>
           </Nav.Item>
         </Nav>
       </Navbar.Collapse>

@@ -5,7 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 const Home = () => (
   <div className="backgroundHome flexContainer">
     <Link to="/gas" className="buttonstyle btn btn-danger btn-lg red">
-      Gas Station
+      Gas Stations
       <p align="center" className=" flexItemDescription smaller">
         Find the nearest gas station
         {' '}
