@@ -142,33 +142,7 @@ class GMap extends React.Component {
     let markers;
     let infoWindows;
     let loadIcon;
-    let mapsLink;
-
-    mapsLink = navigator.userAgent.match(/Android/i)
-      || navigator.userAgent.match(/webOS/i)
-      || navigator.userAgent.match(/iPhone/i)
-      || navigator.userAgent.match(/iPad/i)
-      || navigator.userAgent.match(/iPod/i)
-      || navigator.userAgent.match(/BlackBerry/i)
-      || navigator.userAgent.match(/Windows Phone/i) ? (
-        <a
-          href={`https://maps.google.com/maps/place/?q=${this.state.selectedPlace.position.lat},${this.state.selectedPlace.position.lat}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Link
-        </a>
-      ) : (
-        <a
-          href={`https://maps.google.com/maps/place/?q=place_id:${
-            this.state.selectedPlace.place_id
-          }`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Link
-        </a>
-      );
+    let locationAvailibilty;
 
     if (this.state.loading) {
       loadIcon = <div>Loading...</div>;
@@ -190,6 +164,20 @@ class GMap extends React.Component {
           user_ratings_total={value.user_ratings_total}
         />
       ));
+
+      if (this.state.selectedPlace.position) {
+        locationAvailibilty = (
+          <a
+            href={`https://maps.google.com/maps/place/?q=${this.state.selectedPlace.position.lat},${
+              this.state.selectedPlace.position.lng
+            }`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Link
+          </a>
+        );
+      }
 
       infoWindows = (
         <InfoWindow
@@ -220,13 +208,12 @@ Person(s)
                   ? 'Çlosed'
                   : 'Unknown'}
             </p>
-
-            {mapsLink}
+            {locationAvailibilty}
           </div>
         </InfoWindow>
       );
     }
-    console.log(this.state.selectedPlace);
+    console.log(this.state.selectedPlace.position);
     return (
       <div>
         The flag indicates your current location

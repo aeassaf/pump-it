@@ -35,8 +35,4 @@
   .flexContainerMap {
     flex-direction: column;
   }
-
-  .flexItemMap {
-    color: white;
-  }
 }
