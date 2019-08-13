@@ -144,7 +144,7 @@ class GMap extends React.Component {
     let loadIcon;
 
     if (this.state.loading) {
-      loadIcon = <div className="loading" />;
+      loadIcon = <div>Loading...</div>;
     }
 
     if (this.state.APIContent) {
@@ -209,8 +209,8 @@ Person(s)
     return (
       <div>
         The flag indicates your current location
+        {loadIcon}
         <Map
-          className=""
           style={style}
           google={this.props.google}
           onClick={this.onMapClicked}
@@ -232,7 +232,6 @@ Person(s)
             }}
           />
 
-          {loadIcon}
           {markers}
           {infoWindows}
         </Map>
