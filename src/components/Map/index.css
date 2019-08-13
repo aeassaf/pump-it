@@ -28,11 +28,10 @@
 
   .flexItemMap {
     margin-right: 330px;
-    color: white;
   }
 }
 
-@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+@media only screen and (min-width: 1024px) and (max-width: 1480px) {
   .flexContainerMap {
     flex-direction: column;
   }

@@ -174,13 +174,13 @@ class GMap extends React.Component {
             <h2>{this.state.selectedPlace.name}</h2>
             <p>
               Rating:
-              {this.state.selectedPlace.rating}
+              {` ${this.state.selectedPlace.rating}`}
               {' '}
 Stars
             </p>
             <p>
               User Ratings Total:
-              {this.state.selectedPlace.user_ratings_total}
+              {` ${this.state.selectedPlace.user_ratings_total}`}
               {' '}
 Person(s)
             </p>
