@@ -9,9 +9,9 @@ require('dotenv').config();
 
 const { REACT_APP_API_KEY } = process.env;
 
-const mq1 = window.matchMedia('(min-width: 300px) and (max-width: 699px');
-const mq2 = window.matchMedia('(min-width: 700px) and (max-width: 1023px');
-const mq3 = window.matchMedia('(min-width: 1024px) and (max-width: 1024px');
+const mq1 = window.matchMedia('(min-width: 300px) and (max-width: 699px)');
+const mq2 = window.matchMedia('(min-width: 700px) and (max-width: 1023px)');
+const mq3 = window.matchMedia('(min-width: 1024px) and (max-width: 1024px)');
 
 let style;
 
