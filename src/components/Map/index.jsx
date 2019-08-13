@@ -9,31 +9,31 @@ require('dotenv').config();
 
 const { REACT_APP_API_KEY } = process.env;
 
-const mq1 = window.matchMedia('(min-width: 300px) and (max-width: 699px)');
-const mq2 = window.matchMedia('(min-width: 700px) and (max-width: 1023px)');
+const mq1 = window.matchMedia('(min-width: 300px) and (max-width: 800px)');
+const mq2 = window.matchMedia('(min-width: 800px) and (max-width: 1023px)');
 const mq3 = window.matchMedia('(min-width: 1024px) and (max-width: 1024px)');
 
 let style;
 
 if (mq1.matches) {
   style = {
-    width: '300px',
-    height: '200px',
+    width: '50vw',
+    height: '70vw',
   };
 } else if (mq2.matches) {
   style = {
-    width: '600px',
-    height: '300px',
+    width: '50vw',
+    height: '30vw',
   };
 } else if (mq3.matches) {
   style = {
-    width: '600px',
-    height: '400px',
+    width: '50vw',
+    height: '50vw',
   };
 } else {
   style = {
-    width: '700px',
-    height: '400px',
+    width: '50vw',
+    height: '25vw',
   };
 }
 
@@ -173,9 +173,9 @@ class GMap extends React.Component {
         ) {
           locationAvailibilty = (
             <a
-              href={`http://maps.apple.com/?q=${
-                this.state.selectedPlace.position.lat
-              },${this.state.selectedPlace.position.lng}`}
+              href={`http://maps.apple.com/?q=${this.state.selectedPlace.position.lat},${
+                this.state.selectedPlace.position.lng
+              }`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -231,11 +231,10 @@ Person(s)
         </InfoWindow>
       );
     }
-    console.log(this.state.selectedPlace.position);
     return (
       <div>
-        The flag indicates your current location
         {loadIcon}
+        Flag: Your current location
         <Map
           style={style}
           google={this.props.google}
