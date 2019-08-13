@@ -235,31 +235,33 @@ Person(s)
       <div>
         {loadIcon}
         Flag: Your current location
-        <Map
-          style={style}
-          google={this.props.google}
-          onClick={this.onMapClicked}
-          center={{
-            lat: this.state.userLatitude,
-            lng: this.state.userLongitude,
-          }}
-          zoom={12}
-        >
-          <Marker
-            name="Your location"
-            position={{
+        <div className="wrapMap">
+          <Map
+            style={style}
+            google={this.props.google}
+            onClick={this.onMapClicked}
+            center={{
               lat: this.state.userLatitude,
               lng: this.state.userLongitude,
             }}
-            icon={{
-              url:
-                'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-            }}
-          />
+            zoom={12}
+          >
+            <Marker
+              name="Your location"
+              position={{
+                lat: this.state.userLatitude,
+                lng: this.state.userLongitude,
+              }}
+              icon={{
+                url:
+                  'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+              }}
+            />
 
-          {markers}
-          {infoWindows}
-        </Map>
+            {markers}
+            {infoWindows}
+          </Map>
+        </div>
       </div>
     );
   }
