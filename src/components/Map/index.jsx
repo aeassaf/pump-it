@@ -152,7 +152,7 @@ class GMap extends React.Component {
       || navigator.userAgent.match(/BlackBerry/i)
       || navigator.userAgent.match(/Windows Phone/i) ? (
         <a
-          href={`https://maps.google.com/maps/place/?q=${this.state.selectedPlace.name}`}
+          href={`https://maps.google.com/maps/place/?q=${this.state.selectedPlace.position.lat},${this.state.selectedPlace.position.lat}`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -226,7 +226,7 @@ Person(s)
         </InfoWindow>
       );
     }
-
+    console.log(this.state.selectedPlace);
     return (
       <div>
         The flag indicates your current location
