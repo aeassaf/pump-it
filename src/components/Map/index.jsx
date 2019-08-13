@@ -195,7 +195,7 @@ Person(s)
             </p>
 
             <a
-              href={`https://www.google.com/maps/place/?q=place_id:${
+              href={`https://maps.google.com/maps/place/?q=place_id:${
                 this.state.selectedPlace.place_id
               }`}
             >
