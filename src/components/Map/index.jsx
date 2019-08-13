@@ -155,7 +155,7 @@ class GMap extends React.Component {
     ) {
       mapsLink = (
         <a
-          href={`https://maps.google.com/maps/place/
+          href={`https://maps.google.com/maps/place/?q=hi
           }`}
           target="_blank"
           rel="noopener noreferrer"
