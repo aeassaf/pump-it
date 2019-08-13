@@ -144,27 +144,22 @@ class GMap extends React.Component {
     let loadIcon;
     let mapsLink;
 
-    if (
-      navigator.userAgent.match(/Android/i)
+    mapsLink = navigator.userAgent.match(/Android/i)
       || navigator.userAgent.match(/webOS/i)
       || navigator.userAgent.match(/iPhone/i)
       || navigator.userAgent.match(/iPad/i)
       || navigator.userAgent.match(/iPod/i)
       || navigator.userAgent.match(/BlackBerry/i)
-      || navigator.userAgent.match(/Windows Phone/i)
-    ) {
-      mapsLink = (
+      || navigator.userAgent.match(/Windows Phone/i) ? (
         <a
-          href={`https://maps.google.com/maps/place/?q=hi
+          href={`https://maps.google.com/maps/place/?q=${this.state.selectedPlace.name}
           }`}
           target="_blank"
           rel="noopener noreferrer"
         >
           Link
         </a>
-      );
-    } else {
-      mapsLink = (
+      ) : (
         <a
           href={`https://maps.google.com/maps/place/?q=place_id:${
             this.state.selectedPlace.place_id
@@ -175,7 +170,6 @@ class GMap extends React.Component {
           Link
         </a>
       );
-    }
 
     if (this.state.loading) {
       loadIcon = <div>Loading...</div>;
