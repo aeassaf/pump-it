@@ -1,6 +1,8 @@
 import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import styled from 'styled-components';
+import { withRouter, Link } from 'react-router-dom';
+import './index.css';
 
 const Styles = styled.div`
   .navbar {
@@ -21,6 +23,7 @@ const Styles = styled.div`
     }
   }
 `;
+
 const Navigation = () => (
   <Styles>
     <Navbar expand="lg">
@@ -30,19 +33,29 @@ const Navigation = () => (
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Item>
-            <Nav.Link href="/">Home </Nav.Link>
+            <Link to="/" className="white">
+              Home
+            </Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/gas">Gas </Nav.Link>
+            <Link to="/gas" className="white">
+              Gas
+            </Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/maintenance">Maintenance </Nav.Link>
+            <Link to="/maintenance" className="white">
+              Maintenance
+            </Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/paint-shops">Paint Shops </Nav.Link>
+            <Link to="/paint-shops" className="white">
+              Paint Shops
+            </Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/about">About </Nav.Link>
+            <Link to="/about" className="white">
+              About
+            </Link>
           </Nav.Item>
         </Nav>
       </Navbar.Collapse>
@@ -50,4 +63,4 @@ const Navigation = () => (
   </Styles>
 );
 
-export default Navigation;
+export default withRouter(Navigation);

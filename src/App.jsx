@@ -7,11 +7,9 @@ import PaintShops from './components/Paint-shops';
 import Navigation from './components/Navigation';
 import aboutPage from './components/About';
 
-require('dotenv').config();
-
 function App() {
   return (
-    <div className="App">
+    <div>
       <Router>
         <Navigation />
         <Switch>
@@ -20,6 +18,7 @@ function App() {
           <Route path="/maintenance" component={Garage} />
           <Route path="/gas" component={gasStations} />
           <Route path="/about" component={aboutPage} />
+          <Route path="*" render={() => <div>404 Not Found</div>} />
         </Switch>
       </Router>
     </div>
