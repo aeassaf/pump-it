@@ -45,6 +45,10 @@
   background-color: rgba(255, 0, 0, 0.1);
 }
 
+.grey {
+  background-color: grey;
+}
+
 @media only screen and (min-width: 300px) and (max-width: 799px) {
   .flexContainer {
     flex-direction: column;
