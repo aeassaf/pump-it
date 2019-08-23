@@ -9,34 +9,6 @@ require('dotenv').config();
 
 const { REACT_APP_API_KEY } = process.env;
 
-const mq1 = window.matchMedia('(min-width: 300px) and (max-width: 800px)');
-const mq2 = window.matchMedia('(min-width: 800px) and (max-width: 1023px)');
-const mq3 = window.matchMedia('(min-width: 1024px) and (max-width: 1024px)');
-
-let style;
-
-if (mq1.matches) {
-  style = {
-    width: '50vw',
-    height: '70vw',
-  };
-} else if (mq2.matches) {
-  style = {
-    width: '50vw',
-    height: '30vw',
-  };
-} else if (mq3.matches) {
-  style = {
-    width: '50vw',
-    height: '50vw',
-  };
-} else {
-  style = {
-    width: '50vw',
-    height: '25vw',
-  };
-}
-
 class GMap extends React.Component {
   state = {
     userLatitude: null,
@@ -225,7 +197,6 @@ Person(s)
         Flag: Your current location
         <div className="wrapMap">
           <Map
-            style={style}
             google={this.props.google}
             onClick={this.onMapClicked}
             center={{
