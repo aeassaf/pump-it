@@ -7,27 +7,22 @@ import PaintShops from './components/Paint-shops';
 import Navigation from './components/Navigation';
 import aboutPage from './components/About';
 
-class App extends React.Component {
-  render() {
-    return (
-      console.log(window.location.href),
-      (
-        <div className="App">
-          <Router>
-            <Navigation />
-            <Switch>
-              <Route path="/" component={Home} exact />
-              <Route path="/paint-shops" component={PaintShops} />
-              <Route path="/maintenance" component={Garage} />
-              <Route path="/gas" component={gasStations} />
-              <Route path="/about" component={aboutPage} />
-              <Route path="*" render={() => <div>404 Not Found</div>} />
-            </Switch>
-          </Router>
-        </div>
-      )
-    );
-  }
+function App() {
+  return (
+    <div>
+      <Router>
+        <Navigation />
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/paint-shops" component={PaintShops} />
+          <Route path="/maintenance" component={Garage} />
+          <Route path="/gas" component={gasStations} />
+          <Route path="/about" component={aboutPage} />
+          <Route path="*" render={() => <div>404 Not Found</div>} />
+        </Switch>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
