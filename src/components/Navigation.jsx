@@ -25,7 +25,7 @@ const Navigation = () => (
   <Styles>
     <Navbar expand="lg">
       <Navbar.Brand href="/">Pump It </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Toggle aria-controls="basic-navbar-nav" className="grey" />
 
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
