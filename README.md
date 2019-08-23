@@ -13,4 +13,5 @@ Make sure you press on a red marker on the map to get more info about a specific
 I did this app during my 2019 summer internship at PostLight.
 
 If you have any feedbacks or requests please contact: eliasassaf.antoine@gmail.com
+
 Special Thanks To The PostLight Team!
