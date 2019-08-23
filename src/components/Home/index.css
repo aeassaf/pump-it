@@ -49,6 +49,16 @@
   background-color: grey;
 }
 
+.white {
+  color: white;
+  margin: 10px;
+}
+
+.white:hover {
+  color: grey;
+  text-decoration: none;
+}
+
 @media only screen and (min-width: 300px) and (max-width: 799px) {
   .flexContainer {
     flex-direction: column;
