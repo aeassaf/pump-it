@@ -5,8 +5,6 @@ import {
 } from 'google-maps-react';
 import nearbySearch from '../../utils/api';
 
-require('dotenv').config();
-
 const { REACT_APP_API_KEY } = process.env;
 
 class GMap extends React.Component {
