@@ -8,7 +8,7 @@
     "dotenv": "^8.0.0",
     "esm": "^3.2.25",
     "google-maps-react": "^2.0.2",
-    "lodash": "4.17.13",
+    "lodash": "4.17.21",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
